@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_12_182452) do
+ActiveRecord::Schema.define(version: 2020_03_12_185950) do
 
   create_table "SIS_assignment", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "outof", null: false
@@ -500,6 +500,7 @@ ActiveRecord::Schema.define(version: 2020_03_12_182452) do
     t.string "students"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
   end
 
   create_table "currencies", id: false, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
