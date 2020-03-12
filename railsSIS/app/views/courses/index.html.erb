@@ -18,6 +18,7 @@
       <td><%= course.teacher %></td>
       <td><%= course.description %></td>
       <td><%= link_to 'Show', course_path(course) %></td>
+      <td><%= link_to 'Edit', edit_course_path(course) %></td>
     </tr>
   <% end %>
 </table>
