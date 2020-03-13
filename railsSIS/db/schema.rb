@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_12_185950) do
+ActiveRecord::Schema.define(version: 2020_03_13_133022) do
 
   create_table "SIS_assignment", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "outof", null: false
@@ -76,6 +76,17 @@ ActiveRecord::Schema.define(version: 2020_03_12_185950) do
     t.string "user_pw", limit: 50, null: false
     t.string "user_type", limit: 1, null: false
     t.text "user_permissions", limit: 4294967295, null: false
+  end
+
+  create_table "aattendances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.date "date"
+    t.bigint "courses_id"
+    t.bigint "teacher_id"
+    t.string "student"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["courses_id"], name: "index_aattendances_on_courses_id"
+    t.index ["teacher_id"], name: "index_aattendances_on_teacher_id"
   end
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -1235,6 +1246,14 @@ ActiveRecord::Schema.define(version: 2020_03_12_185950) do
     t.index ["contact"], name: "FK_system_users"
   end
 
+  create_table "teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "surname"
+    t.string "department"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "time_plan_items", primary_key: ["code", "semester", "year"], options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "code", limit: 8, default: "", null: false
     t.string "semester", limit: 1, default: "W", null: false
@@ -1333,6 +1352,8 @@ ActiveRecord::Schema.define(version: 2020_03_12_185950) do
   add_foreign_key "SIS_marks", "SIS_assignment", column: "assignment_id", name: "SIS_marks_assignment_id_3d7b0b0c_fk_SIS_assignment_id"
   add_foreign_key "SIS_marks", "SIS_student", column: "student_id", name: "SIS_marks_student_id_3b62c559_fk_SIS_student_id"
   add_foreign_key "SIS_student", "SIS_locker", column: "locker_id", name: "SIS_student_locker_id_840af384_fk_SIS_locker_id"
+  add_foreign_key "aattendances", "courses", column: "courses_id"
+  add_foreign_key "aattendances", "teachers"
   add_foreign_key "agents", "agencies", column: "agency", primary_key: "agency_code", name: "FK_agents", on_update: :cascade, on_delete: :cascade
   add_foreign_key "auth_group_permissions", "auth_group", column: "group_id", name: "auth_group_permissions_group_id_b120cbf9_fk_auth_group_id"
   add_foreign_key "auth_group_permissions", "auth_permission", column: "permission_id", name: "auth_group_permissio_permission_id_84c5c92e_fk_auth_perm"

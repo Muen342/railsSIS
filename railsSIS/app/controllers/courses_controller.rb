@@ -14,6 +14,10 @@ class CoursesController < ApplicationController
         @course = Course.find(params[:id])
     end
 
+    def editAttendance
+        @course = Course.find(params[:id])
+    end
+
     def create
         @course = Course.new(course_params)
         @course.save
@@ -31,6 +35,6 @@ class CoursesController < ApplicationController
 
     private
         def course_params
-            params.require(:course).permit(:title, :code, :teacher, :credits, :description)
+            params.require(:courses).permit(:title, :code, :teacher, :credits, :description)
         end
 end

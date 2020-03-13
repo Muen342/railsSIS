@@ -1,0 +1,24 @@
+<h2>Add Teacher</h2>
+
+<%= form_with model: @teacher, local: true do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+  
+  <p>
+    <%= form.label :surname %><br>
+    <%= form.text_field :surname %>
+  </p>
+
+  <p>
+    <%= form.label :department %><br>
+    <%= form.text_field :department %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<br><br><%= link_to "<< Back", teacher_path %>

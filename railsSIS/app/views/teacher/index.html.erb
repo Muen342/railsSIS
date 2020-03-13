@@ -1,0 +1,21 @@
+<h2>Teachers</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Department</th>
+    <th></th>
+  </tr>
+ 
+  <% @teachers.each do |teacher| %>
+    <tr>
+      <td><%= teacher.name %> <%= teacher.surname %></td>
+      <td><%= teacher.department %></td>
+      <td><%= link_to 'Show', teacher_path(teacher) %></td>
+      <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br><br><%= link_to "Add Teacher", new_teacher_path %>
+<br><p>Back</p>
