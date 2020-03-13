@@ -3,11 +3,11 @@
 one:
   date: 2020-03-13
   attendance: MyString
-  courses: one
-  sstudent: one
+  course_id: 
+  student_id: 
 
 two:
   date: 2020-03-13
   attendance: MyString
-  courses: two
-  sstudent: two
+  course_id: 
+  student_id: 

@@ -1,3 +1,10 @@
 <h2>Edit Attendance</h2>
 
 <p><%= @course.code %> - <%= @course.title %></p>
+<%= form_tag do %>
+    <% @students.each do |stud| %>
+        <%= stud.name %>
+        <%= text_field_tag(stud.name) %><br><br>
+    <% end %>
+    <%= submit_tag("Save") %>
+<% end %>

@@ -1,0 +1,16 @@
+<h2>Show Attendance</h2>
+<%= @course.code %> - <%= @course.title %>
+
+<table>
+    <tr>
+        <th></th>
+        <% @date_list.each do |d| %>
+            <th><%= d.date %></th>
+        <% end %>
+    </tr>
+    <% @attendance_list.each do |att| %>
+        <tr>
+            <td><%= att['name'] %></td>
+        </tr>
+    <% end %>
+</table>

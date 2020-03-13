@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :attendance
   resources :sstudents
 
-  get 'coursesEditAttendance', to: 'courses#editAttendance'
   get '/courses/:id/editAttendance(.:format)', to: 'courses#editAttendance', as: 'courses_editAttendance'
+  get '/courses/:id/showAttendance(.:format)', to: 'courses#showAttendance', as: 'courses_showAttendance'
+  post '/courses/:id/editAttendance(.:format)', to: 'courses#saveAttendance'
   root 'homepage#index'
 end

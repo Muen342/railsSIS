@@ -23,5 +23,15 @@
   <%= @course.description %>
 </p>
 
+<p>
+  <strong>Students:</strong>
+  <ul>
+    <% @students.each do |stud| %>
+      <li><%= stud.name %></li>
+    <% end %>
+  </ul>
+</p>
+
 <%= link_to "Edit Attendance", courses_editAttendance_url(@course)%>
+<%= link_to "Show Attendance", courses_showAttendance_url(@course)%>
 <br><br><%= link_to "<< Back", courses_path %>
