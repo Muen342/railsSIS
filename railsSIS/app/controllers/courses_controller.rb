@@ -24,18 +24,27 @@ class CoursesController < ApplicationController
     def showAttendance
         @course = Course.find(params[:id])
         @attendance_list = []
-        @date_list = []
         dateToday = Date.today.strftime("%F")
         @course.students.split(',').each do |stud|
             stud = stud[1..-2]
             s = Sstudent.find(stud)
-            att = {'name': s.surname + ',' + s.name}
-            a = Attendance.where(course_id: params[:id], student_id: stud).order(:id)
-            att['attendance'] = a
+            att = {'name': s.surname + ', ' + s.name}
+            record = ActiveRecord::Base.connection.execute("select id from attendances where course_id = " + params[:id] + " and student_id = " + stud + " order by id;")
+            ids = []
+            record.each do |id|
+                ids.append(id)
+            end
+            a = Attendance.find(ids)
+            att[:attendance] = a
             @attendance_list.append(att)
         end
 
-        @date_list = @attendance_list[0]['attendance'].uniq
+        @date_list = []
+        #@date_list = @attendance_list[0][:attendance].uniq
+        record = ActiveRecord::Base.connection.execute("select distinct date from attendances where course_id = " + params[:id] + " order by date desc;")
+        record.each do |d|
+            @date_list.append(d)
+        end
 
     end
 
