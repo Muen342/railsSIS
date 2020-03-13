@@ -1,0 +1,23 @@
+<h2>Student courses</h2>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Code</th>
+    <th>Credits</th>
+    <th>Teacher</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
+ 
+  <% @courses.each do |course| %>
+    <tr>
+      <td><%= course.title %></td>
+      <td><%= course.code %></td>
+      <td><%= course.credits %></td>
+      <td><%= course.teacher %></td>
+      <td><%= course.description %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'Back', sstudent_path %>

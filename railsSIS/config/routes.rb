@@ -9,5 +9,6 @@ Rails.application.routes.draw do
 
   get 'coursesEditAttendance', to: 'courses#editAttendance'
   get '/courses/:id/editAttendance(.:format)', to: 'courses#editAttendance', as: 'courses_editAttendance'
+  get '/sstudents/:id/courses(.:format)', to: 'sstudents#courses', as: 'sstudents_courses'
   root 'homepage#index'
 end

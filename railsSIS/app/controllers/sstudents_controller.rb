@@ -12,6 +12,16 @@ class SstudentsController < ApplicationController
     def show
         @sstudent = Sstudent.find(params[:id])
     end
+    def courses
+        record = ActiveRecord::Base.connection.execute("Select id from courses where students like '%*" + params[:id] + "*%';")
+        i = 0
+        ids = []
+        record.each do |row|
+            ids << row
+        end
+        @courses = Course.find(ids)
+        render 'courses'
+    end
     def create
         @sstudent = Sstudent.new(sstudent_params)
    
