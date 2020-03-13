@@ -2,12 +2,12 @@
 
 one:
   date: 2020-03-13
+  attendance: MyString
   courses: one
-  teacher: one
-  student: MyString
+  sstudent: one
 
 two:
   date: 2020-03-13
+  attendance: MyString
   courses: two
-  teacher: two
-  student: MyString
+  sstudent: two
