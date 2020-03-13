@@ -1,3 +1,3 @@
 class Sstudent < ApplicationRecord
-    has_many :attendance
+    self.primary_key = :id
 end
