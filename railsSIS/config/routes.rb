@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :courses
   resources :teacher
-  resources :aattendance
+  resources :attendance
   resources :sstudents
 
   get 'coursesEditAttendance', to: 'courses#editAttendance'
