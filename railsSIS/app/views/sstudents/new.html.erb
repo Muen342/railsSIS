@@ -1,0 +1,22 @@
+<h1>New Student</h1>
+<%= form_with scope: :student, url: sstudents_path, local: true do |form| %>
+<p>
+<%= form.label :id %><br>
+<%= form.number_field :id %>
+</p>
+<p>
+<%= form.label :name %><br>
+<%= form.text_field :name %>
+</p>
+<p>
+<%= form.label :surname %><br>
+<%= form.text_field :surname %>
+</p>
+<p>
+<%= form.label :grade %><br>
+<%= form.number_field :grade %>
+</p>
+<p>
+<%= form.submit "Save Student"%>
+</p>
+<% end %>

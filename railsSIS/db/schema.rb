@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_13_133022) do
+ActiveRecord::Schema.define(version: 2020_03_13_145135) do
 
-  create_table "SIS_assignment", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "SIS_assignment", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "outof", null: false
     t.decimal "weight", precision: 5, scale: 2, null: false
     t.string "title", limit: 50, null: false
@@ -21,16 +21,16 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.index ["course_id"], name: "SIS_assignment_course_id_17c5ca07_fk"
   end
 
-  create_table "SIS_attendance", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "SIS_attendance", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.date "date", null: false
     t.string "attendance", limit: 1, null: false
     t.integer "course_id", null: false
     t.integer "student_id", null: false
-    t.index ["course_id"], name: "SIS_attendance_course_id_c18593b6_fk"
+    t.index ["course_id"], name: "SIS_attendance_course_id_c18593b6_fk_SIS_courses_id"
     t.index ["student_id"], name: "SIS_attendance_student_id_da61073f_fk_SIS_student_id"
   end
 
-  create_table "SIS_courses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "SIS_courses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "title", limit: 30, null: false
     t.decimal "credit", precision: 3, scale: 2, null: false
     t.text "description", limit: 4294967295, null: false
@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.index ["teacher_id"], name: "SIS_courses_teacher_id_12187818_fk_SIS_teacher_id"
   end
 
-  create_table "SIS_locker", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "SIS_locker", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "location", limit: 50, null: false
     t.boolean "active", null: false
     t.string "combination", limit: 20, null: false
   end
 
-  create_table "SIS_marks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "SIS_marks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "mark", null: false
     t.integer "assignment_id", null: false
     t.integer "student_id", null: false
@@ -54,11 +54,11 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.index ["student_id"], name: "SIS_marks_student_id_3b62c559_fk_SIS_student_id"
   end
 
-  create_table "SIS_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "SIS_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.text "permissions_list", limit: 4294967295, null: false
   end
 
-  create_table "SIS_student", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "SIS_student", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", limit: 100, null: false
     t.string "surname", limit: 100, null: false
     t.integer "grade", null: false
@@ -66,19 +66,19 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.index ["locker_id"], name: "SIS_student_locker_id_840af384_fk_SIS_locker_id"
   end
 
-  create_table "SIS_teacher", id: :string, limit: 20, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "SIS_teacher", id: :string, limit: 20, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", limit: 100, null: false
     t.string "surname", limit: 100, null: false
     t.string "department", limit: 50, null: false
   end
 
-  create_table "SIS_user", primary_key: "user_id", id: :string, limit: 20, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "SIS_user", primary_key: "user_id", id: :string, limit: 20, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "user_pw", limit: 50, null: false
     t.string "user_type", limit: 1, null: false
     t.text "user_permissions", limit: 4294967295, null: false
   end
 
-  create_table "aattendances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "aattendances", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.date "date"
     t.bigint "courses_id"
     t.bigint "teacher_id"
@@ -238,26 +238,26 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.string "attendance", limit: 1
   end
 
-  create_table "auth_group", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "auth_group", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", limit: 150, null: false
     t.index ["name"], name: "name", unique: true
   end
 
-  create_table "auth_group_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "auth_group_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "group_id", null: false
     t.integer "permission_id", null: false
     t.index ["group_id", "permission_id"], name: "auth_group_permissions_group_id_permission_id_0cd325b0_uniq", unique: true
     t.index ["permission_id"], name: "auth_group_permissio_permission_id_84c5c92e_fk_auth_perm"
   end
 
-  create_table "auth_permission", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "auth_permission", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
     t.integer "content_type_id", null: false
     t.string "codename", limit: 100, null: false
     t.index ["content_type_id", "codename"], name: "auth_permission_content_type_id_codename_01ab375a_uniq", unique: true
   end
 
-  create_table "auth_user", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "auth_user", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "password", limit: 128, null: false
     t.datetime "last_login", precision: 6
     t.boolean "is_superuser", null: false
@@ -271,14 +271,14 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.index ["username"], name: "username", unique: true
   end
 
-  create_table "auth_user_groups", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "auth_user_groups", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "group_id", null: false
     t.index ["group_id"], name: "auth_user_groups_group_id_97559544_fk_auth_group_id"
     t.index ["user_id", "group_id"], name: "auth_user_groups_user_id_group_id_94350c0c_uniq", unique: true
   end
 
-  create_table "auth_user_user_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "auth_user_user_permissions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "permission_id", null: false
     t.index ["permission_id"], name: "auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm"
@@ -300,6 +300,26 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.string "ForMeal", limit: 15, null: false
     t.string "AllTimeCount", limit: 4
     t.string "DaysOffered", limit: 4
+  end
+
+  create_table "caf_log", primary_key: "stud_id", id: :string, limit: 45, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "type", limit: 45
+    t.integer "f_num"
+    t.integer "c_num"
+    t.string "m_status", limit: 45
+    t.date "S_start_date"
+    t.date "S_end_date"
+    t.string "meal_type", limit: 45
+    t.integer "bal"
+    t.string "room", limit: 45
+    t.string "special_diet", limit: 45
+    t.string "allergies", limit: 45
+    t.string "user_type", limit: 45
+    t.datetime "time"
+    t.integer "contact"
+    t.string "specify_other", limit: 128
+    t.string "name", limit: 45
+    t.string "surname", limit: 45
   end
 
   create_table "caf_menu", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -503,7 +523,7 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.string "status", limit: 1
   end
 
-  create_table "courses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "courses", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.string "teacher"
@@ -518,7 +538,7 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.string "currency_code", limit: 3
   end
 
-  create_table "django_admin_log", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "django_admin_log", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.datetime "action_time", precision: 6, null: false
     t.text "object_id", limit: 4294967295
     t.string "object_repr", limit: 200, null: false
@@ -530,19 +550,19 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.index ["user_id"], name: "django_admin_log_user_id_c564eba6_fk_auth_user_id"
   end
 
-  create_table "django_content_type", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "django_content_type", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "app_label", limit: 100, null: false
     t.string "model", limit: 100, null: false
     t.index ["app_label", "model"], name: "django_content_type_app_label_model_76bd3d3b_uniq", unique: true
   end
 
-  create_table "django_migrations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "django_migrations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "app", null: false
     t.string "name", null: false
     t.datetime "applied", precision: 6, null: false
   end
 
-  create_table "django_session", primary_key: "session_key", id: :string, limit: 40, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "django_session", primary_key: "session_key", id: :string, limit: 40, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.text "session_data", limit: 4294967295, null: false
     t.datetime "expire_date", precision: 6, null: false
     t.index ["expire_date"], name: "django_session_expire_date_a5c62663"
@@ -1112,6 +1132,14 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.string "tracking", limit: 45
   end
 
+  create_table "sstudents", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "name"
+    t.string "surname"
+    t.integer "grade"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "staff", primary_key: "user_id", id: :string, limit: 18, default: "", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "staff_type", limit: 1
     t.binary "photo"
@@ -1227,6 +1255,52 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.index ["mother"], name: "FK_students4"
   end
 
+  create_table "students_assignment", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "outof", null: false
+    t.decimal "weight", precision: 5, scale: 2, null: false
+    t.string "title", limit: 50, null: false
+    t.string "category", limit: 20, null: false
+    t.string "course_id", limit: 6, null: false
+    t.index ["course_id"], name: "students_assignment_course_id_179da3f8_fk_students_courses_id"
+  end
+
+  create_table "students_courses", id: :string, limit: 6, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "title", limit: 30, null: false
+    t.decimal "credit", precision: 3, scale: 2, null: false
+    t.text "description", limit: 4294967295, null: false
+    t.text "students", limit: 4294967295, null: false
+    t.string "teacher_id", limit: 20, null: false
+    t.index ["teacher_id"], name: "students_courses_teacher_id_fde851c9_fk_students_teacher_id"
+  end
+
+  create_table "students_locker", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "location", limit: 50, null: false
+    t.boolean "active", null: false
+    t.string "combination", limit: 20, null: false
+  end
+
+  create_table "students_marks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "mark", null: false
+    t.integer "assignment_id", null: false
+    t.integer "student_id", null: false
+    t.index ["assignment_id"], name: "students_marks_assignment_id_8bac113b_fk_students_assignment_id"
+    t.index ["student_id"], name: "students_marks_student_id_ed54e150_fk_students_student_id"
+  end
+
+  create_table "students_student", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.string "surname", limit: 100, null: false
+    t.integer "grade", null: false
+    t.integer "locker_id", null: false
+    t.index ["locker_id"], name: "students_student_locker_id_3794c847_fk_students_locker_id"
+  end
+
+  create_table "students_teacher", id: :string, limit: 20, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.string "surname", limit: 100, null: false
+    t.string "department", limit: 50, null: false
+  end
+
   create_table "system_users", primary_key: "user_id", id: :string, limit: 18, default: "", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "created"
     t.string "courtesy_title", limit: 4
@@ -1246,7 +1320,7 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
     t.index ["contact"], name: "FK_system_users"
   end
 
-  create_table "teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.string "surname"
     t.string "department"
@@ -1346,7 +1420,7 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
   end
 
   add_foreign_key "SIS_assignment", "SIS_courses", column: "course_id", name: "SIS_assignment_course_id_17c5ca07_fk"
-  add_foreign_key "SIS_attendance", "SIS_courses", column: "course_id", name: "SIS_attendance_course_id_c18593b6_fk"
+  add_foreign_key "SIS_attendance", "SIS_courses", column: "course_id", name: "SIS_attendance_course_id_c18593b6_fk_SIS_courses_id"
   add_foreign_key "SIS_attendance", "SIS_student", column: "student_id", name: "SIS_attendance_student_id_da61073f_fk_SIS_student_id"
   add_foreign_key "SIS_courses", "SIS_teacher", column: "teacher_id", name: "SIS_courses_teacher_id_12187818_fk_SIS_teacher_id"
   add_foreign_key "SIS_marks", "SIS_assignment", column: "assignment_id", name: "SIS_marks_assignment_id_3d7b0b0c_fk_SIS_assignment_id"
@@ -1367,6 +1441,7 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
   add_foreign_key "django_admin_log", "auth_user", column: "user_id", name: "django_admin_log_user_id_c564eba6_fk_auth_user_id"
   add_foreign_key "django_admin_log", "django_content_type", column: "content_type_id", name: "django_admin_log_content_type_id_c4bce8eb_fk_django_co"
   add_foreign_key "evaluation_plan_items", "course_codes", column: "code", primary_key: "code", name: "FK_evaluation_plan_items", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "hr_attendances", "hr_users", column: "user_id", primary_key: "user_id"
   add_foreign_key "hr_hours", "system_users", column: "user_id", primary_key: "user_id", name: "hr_hours_ibfk_1"
   add_foreign_key "hr_users", "system_users", column: "user_id", primary_key: "user_id", name: "hr_users_ibfk_1"
   add_foreign_key "inventory_item", "item_type", column: "item_type", primary_key: "type_name", name: "FK_inventory_item", on_update: :cascade, on_delete: :cascade
@@ -1374,7 +1449,13 @@ ActiveRecord::Schema.define(version: 2020_03_13_133022) do
   add_foreign_key "inventory_item", "system_users", column: "owner", primary_key: "user_id", name: "FK_inventory_item3"
   add_foreign_key "new_marks", "students", column: "student", primary_key: "user_id", name: "FK_new_marks", on_update: :cascade, on_delete: :cascade
   add_foreign_key "parents", "system_users", column: "user_id", primary_key: "user_id", name: "FK_parents", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "recurring_events", "hr_users", column: "user_id", primary_key: "user_id"
   add_foreign_key "reservations", "res_rooms", column: "room_id", primary_key: "room_id", name: "reservations_ibfk_1"
   add_foreign_key "staff", "system_users", column: "user_id", primary_key: "user_id", name: "FK_staff", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "students_assignment", "students_courses", column: "course_id", name: "students_assignment_course_id_179da3f8_fk_students_courses_id"
+  add_foreign_key "students_courses", "students_teacher", column: "teacher_id", name: "students_courses_teacher_id_fde851c9_fk_students_teacher_id"
+  add_foreign_key "students_marks", "students_assignment", column: "assignment_id", name: "students_marks_assignment_id_8bac113b_fk_students_assignment_id"
+  add_foreign_key "students_marks", "students_student", column: "student_id", name: "students_marks_student_id_ed54e150_fk_students_student_id"
+  add_foreign_key "students_student", "students_locker", column: "locker_id", name: "students_student_locker_id_3794c847_fk_students_locker_id"
   add_foreign_key "time_plan_items", "course_codes", column: "code", primary_key: "code", name: "FK_time_plan_items", on_update: :cascade, on_delete: :cascade
 end
