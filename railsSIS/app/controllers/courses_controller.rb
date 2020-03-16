@@ -93,6 +93,28 @@ class CoursesController < ApplicationController
         redirect_to course_path(@course)
     end
 
+    def addStudents
+        @course = Course.find(params[:id])
+        @students = Sstudent.all.order(:surname)
+    end
+
+    def saveStudents
+        @added = params[:added]
+        @students = ""
+        @added.each do |a, b|
+            if @students == ""
+                @students += "*#{a}*"
+            else
+                @students += ",*#{a}*"
+            end
+        end
+
+        @course = Course.find(params[:id])
+        @course.students = @students
+        @course.save
+        redirect_to @course
+    end
+
     def create
         @course = Course.new(course_params)
         @course.save

@@ -36,6 +36,8 @@
   <p>No students added to this class yet!</p>
 <% end %>
 
+<%= link_to "Add Students", courses_addStudents_url(@course)%><br>
+
 <%= link_to "Edit Attendance", courses_editAttendance_url(@course)%>
 <%= link_to "Show Attendance", courses_showAttendance_url(@course)%>
 <br><br><%= link_to "<< Back", courses_path %>

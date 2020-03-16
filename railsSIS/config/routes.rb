@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   get '/courses/:id/showAttendance(.:format)', to: 'courses#showAttendance', as: 'courses_showAttendance'
   post '/courses/:id/editAttendance(.:format)', to: 'courses#saveAttendance'
   get '/sstudents/:id/courses(.:format)', to: 'sstudents#courses', as: 'sstudents_courses'
+  get '/courses/:id/addStudents(.:format)', to: 'courses#addStudents', as: 'courses_addStudents'
+  post '/courses/:id/addStudents(.:format)', to: 'courses#saveStudents'
   root 'homepage#index'
 end

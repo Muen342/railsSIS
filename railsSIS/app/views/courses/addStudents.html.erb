@@ -1,0 +1,11 @@
+<h2>Add Students</h2>
+
+<%= form_tag do %>
+    <% @students.each do |stud| %>
+        <%= check_box_tag("added[#{stud.id}]")%>
+        <%= stud.surname %>, <%= stud.name %><br><br>
+    <% end %>
+    <%= submit_tag("Add") %>
+<% end %>
+
+<br><br><%= link_to "<< Back", course_path %>
