@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
             stud = stud[1..-2]
             s = Sstudent.find(stud)
             att = {'name': s.surname + ', ' + s.name}
-            record = ActiveRecord::Base.connection.execute("select id from attendances where course_id = " + params[:id] + " and student_id = " + stud + " order by id;")
+            record = ActiveRecord::Base.connection.execute("select id from attendances where course_id = " + params[:id] + " and student_id = " + stud + " order by date desc;")
             ids = []
             record.each do |id|
                 ids.append(id)
@@ -68,13 +68,22 @@ class CoursesController < ApplicationController
             @students.append(s)
         end
 
+        dateToday = Date.today.strftime("%F")
         @students.each do |stud|
-            a = Attendance.new
+            record = ActiveRecord::Base.connection.execute("select id, attendance from attendances where course_id = " + params[:id] + " and student_id = #{stud.id} and date = '" + dateToday + "';")
+            rec = record.to_a
+            if rec[0]
+                if rec[1] == params[stud.name]
+                    next
+                end
+                a = Attendance.find(rec[0][0])
+            else
+                a = Attendance.new
+                a.course_id = params[:id]
+                a.student_id = stud.id
+                a.date = dateToday
+            end
             a.attendance = params[stud.name]
-            a.course_id = params[:id]
-            a.student_id = stud.id
-            a.date = Date.today.strftime("%F")
-            print a
             a.save
         end
         redirect_to courses_path(@course)
