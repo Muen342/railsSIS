@@ -14,7 +14,6 @@ class SstudentsController < ApplicationController
     end
     def courses
         record = ActiveRecord::Base.connection.execute("Select id from courses where students like '%*" + params[:id] + "*%';")
-        i = 0
         ids = []
         record.each do |row|
             ids << row
@@ -34,6 +33,20 @@ class SstudentsController < ApplicationController
     def update
         @sstudent = Sstudent.find(params[:id])
         if @sstudent.update(sstudent_params)
+            if params[:id] != sstudent_params[:id]
+                record = ActiveRecord::Base.connection.execute("Select id from courses where students like '%*" + params[:id] + "*%';")
+                ids = []
+                record.each do |row|
+                    ids << row
+                end
+                courses = Course.find(ids)
+                courses.each do |course|
+                    temp = course[:students]
+                    temp["*" + params[:id] + "*"] = "*" + sstudent_params[:id] + "*"
+                    course[:students] = temp
+                    course.save
+                end
+            end
             redirect_to @sstudent
           else
             render 'edit'
