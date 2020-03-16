@@ -5,19 +5,23 @@ class CoursesController < ApplicationController
     end
 
     def new
+        @teachers = Teacher.all
     end
 
     def edit
         @course = Course.find(params[:id])
+        @teachers = Teacher.all
     end
 
     def show
         @course = Course.find(params[:id])
         @students = []
-        @course.students.split(',').each do |stud|
-            stud = stud[1..-2]
-            s = Sstudent.find(stud)
-            @students.append(s)
+        if @course.students
+            @course.students.split(',').each do |stud|
+                stud = stud[1..-2]
+                s = Sstudent.find(stud)
+                @students.append(s)
+            end
         end
     end
 
@@ -86,7 +90,7 @@ class CoursesController < ApplicationController
             a.attendance = params[stud.name]
             a.save
         end
-        redirect_to courses_path(@course)
+        redirect_to course_path(@course)
     end
 
     def create
@@ -113,5 +117,3 @@ class CoursesController < ApplicationController
             params.require(:attendance).permit(:attendance)
         end
 end
-
-# date, attendance, course, student

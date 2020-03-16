@@ -17,8 +17,16 @@
   </p>
 
   <p>
-    <%= form.label :teacher %><br>
-    <%= form.text_field :teacher %>
+    <label>Teacher</label><br>
+    <select name="courses[teacher]" id="courses_teacher">
+      <% @teachers.each do |t| %>
+        <% if @course.teacher == "#{t.name} #{t.surname}" %>
+          <option value="<%= t.name %> <%= t.surname %>" selected="selected" ><%= t.name %> <%= t.surname %></option>
+        <% else %>
+          <option value="<%= t.name %> <%= t.surname %>" ><%= t.name %> <%= t.surname %></option>
+        <%end%>
+      <% end %>
+    </select>
   </p>
  
   <p>
