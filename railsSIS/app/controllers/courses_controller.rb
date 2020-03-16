@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
             stud = stud[1..-2]
             s = Sstudent.find(stud)
             att = {'name': s.surname + ', ' + s.name}
-            record = ActiveRecord::Base.connection.execute("select id from attendances where course_id = " + params[:id] + " and student_id = " + stud + " order by id;")
+            record = ActiveRecord::Base.connection.execute("select id from attendances where course_id = " + params[:id] + " and student_id = " + stud + " order by date desc;")
             ids = []
             record.each do |id|
                 ids.append(id)
